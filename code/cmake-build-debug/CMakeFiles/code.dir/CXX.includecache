@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/alejo/Documents/Facultad/AyED/Parcial1/code/Main.cpp
+cstdlib
+-
+iostream
+-
+sstream
+-
+fstream
+-
+string
+-
+bits/stdc++.h
+-
+algorithm
+-
+functional
+-
+cctype
+-
+
