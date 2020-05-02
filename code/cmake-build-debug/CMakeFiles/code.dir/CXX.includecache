@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/alejo/Documents/Facultad/AyED/Parcial1/code/Main.cpp
+/home/candela/Desktop/ALGORITMOS/GITHUB/Parcial1-AyED/code/Main.cpp
 cstdlib
 -
 iostream
