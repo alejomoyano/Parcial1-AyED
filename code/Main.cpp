@@ -11,6 +11,7 @@
 using namespace std;
 
 string intermedio(string cadena,int p, int size);
+void trim(string &str);
 
 template <class T> class Nodo {
 private:
@@ -243,20 +244,73 @@ bool pilavacia(){return this->esvacia();};
 int main() {
 
 
-
-    string myText,str_auxiliar=" ",str_auxiliar2=" ";
+    string myText, str_auxiliar = " ", str_auxiliar2 = " ";
     Pila<char> *pila = new Pila<char>;
     Pila<string> *tokens = new Pila<string>;
-    string apilando=" ";
+    string apilando = " ";
 
-    bool error=true;
+    bool error = true;
 // Read from the text file
     ifstream MyReadFile("File.html");
 
 // Use a while loop together with the getline() function to read the file line by line
-    while (getline (MyReadFile, myText)) {
-        int p=0,f=0;
-        const int size =myText.length();
+    while (getline(MyReadFile, myText)) {
+        int p = 0, f = 0;
+
+
+        if (myText != "") {
+            if (myText.at(0) == ' ') {
+                trim(myText);
+            }
+//        cout<<myText<<endl;
+            const int size = myText.length();
+
+            // Output the text from the file
+            for (int i = 0; i < size; i++) {
+                if (myText.at(i) == '<') {
+                    p = i;
+                }
+                if (myText.at(i) == '>') {
+                    f = i + 1;
+                    string str = myText.substr(p, f);
+                    cout << str << endl;
+                    string inicio = intermedio(myText, f, size);
+                }
+            }
+        }
+    }
+        MyReadFile.close();
+    }
+
+
+    string intermedio(string cadena, int p, int size) {
+        for (int i = p; i < size; i++) {
+            if (cadena.at(i) == '<') {
+                string subs = cadena.substr(p, i - p);
+                cout << subs << endl;
+                if (subs != " ") {
+                    return subs;
+                }
+            }
+        }
+    }
+
+    void trim(string &str) {
+    bool end=true;
+
+            int i = 0,n=0;
+            while (end) {
+                if (str.at(i) == ' ') {
+                    n = i;
+                    i++;
+                } else {
+                    end = false;
+                }
+            }
+            str.erase(0, n + 1);
+
+    }
+
 //        char to_char[size];
 //        strcpy(to_char,myText.c_str());
 //        for (int i = 0; i < size; i++) {
@@ -273,34 +327,3 @@ int main() {
 //
 //            error=false;
 //        }
-        // Output the text from the file
-        for (int i = 0; i < size; i++) {
-            if(myText.at(i)=='<'){
-                p=i;
-            }
-            if(myText.at(i)=='>'){
-                f=i+1;
-                string str=myText.substr(p,f);
-                cout<<str<<endl;
-                string inicio=intermedio(myText,f,size);
-
-            }
-        }
-    }
-
-    MyReadFile.close();
-
-}
-
-string intermedio(string cadena,int p, int size){
-    for (int i = p; i < size; i++) {
-        if(cadena.at(i)=='<'){
-            string subs = cadena.substr(p,i-p);
-            cout<<subs<<endl;
-            if(subs!=" "){
-                return subs;
-            }
-        }
-    }
-}
-
