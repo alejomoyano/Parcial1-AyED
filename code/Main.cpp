@@ -262,28 +262,29 @@ int main() {
             pila->apilar(myText.at(i));
         }
 
-        while (!pila->pilavacia()) {
+        while (!pila->pilavacia()) {//repite esto hasta que se vacia la pila
             tope = pila->tope();
-            if (tope == "<") {
+            if (tope == "<") {//entra si encuentra un < al principio
                 do {
                     tope = pila->tope();
                     pila->desapilar();
                     token += tope;
-                } while (tope != ">");
+                } while (tope != ">");//guarda en un string lo que esta dentro de los brakets incluyendolos (tags)
                 tokens->apilar(token);
                 cout << token << endl;
-                token = "";
+                token = "";//pone en null al string para que no se concatene todo el string, solo lo que necesitamos
             }
-            if (!pila->pilavacia()) {
+            if (!pila->pilavacia()) {//entra aca si no es vacia la pila y si no hay un < al principio
                 do {
                     tope = pila->tope();
                     pila->desapilar();
                     token += tope;
-                } while (pila->tope() != '<');
+                } while (pila->tope() != '<');//guarda el texto que se encuantra entre tags
                 tokens->apilar(token);
                 cout << token << endl;
-                token = "";
+                token = "";//pone en null al string para que no se concatene todo el string, solo lo que necesitamos
             }
+
         }
     }
     MyReadFile.close();
