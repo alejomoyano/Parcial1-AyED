@@ -27,15 +27,7 @@
         <item name="GROUP_NODE:candetche" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:candetche" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/candetche/prueba" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </select>
+    <select />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
@@ -49,7 +41,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e34acf39-7824-403c-ae70-3416ab2748e0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled1.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/untitled1.dir/main.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/untitled1" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/untitled1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
@@ -181,22 +172,22 @@
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1588201489938" />
     <state x="526" y="223" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1588691199384" />
-    <state width="1320" height="149" key="GridCell.Tab.0.bottom" timestamp="1588719229562">
+    <state width="1320" height="149" key="GridCell.Tab.0.bottom" timestamp="1588720453081">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="149" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1588719229562" />
-    <state width="1320" height="149" key="GridCell.Tab.0.center" timestamp="1588719229556">
+    <state width="1320" height="149" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1588720453081" />
+    <state width="1320" height="149" key="GridCell.Tab.0.center" timestamp="1588720453071">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="149" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1588719229556" />
-    <state width="1320" height="149" key="GridCell.Tab.0.left" timestamp="1588719229555">
+    <state width="1320" height="149" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1588720453071" />
+    <state width="1320" height="149" key="GridCell.Tab.0.left" timestamp="1588720453070">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="149" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1588719229555" />
-    <state width="1320" height="149" key="GridCell.Tab.0.right" timestamp="1588719229557">
+    <state width="1320" height="149" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1588720453070" />
+    <state width="1320" height="149" key="GridCell.Tab.0.right" timestamp="1588720453074">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="149" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1588719229557" />
+    <state width="1320" height="149" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1588720453074" />
     <state width="1320" height="219" key="GridCell.Tab.1.bottom" timestamp="1588718982997">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -221,9 +212,9 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="219" y="113" width="918" height="566" key="VcsDiffUtil.ChangesDialog/0.27.1366.741@0.27.1366.741" timestamp="1588690787035" />
-    <state x="454" y="311" width="457" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588693829680">
+    <state x="454" y="311" width="457" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588720563854">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="454" y="311" width="457" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.27.1366.741@0.27.1366.741" timestamp="1588693829680" />
+    <state x="454" y="311" width="457" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.27.1366.741@0.27.1366.741" timestamp="1588720563854" />
   </component>
 </project>

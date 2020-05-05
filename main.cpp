@@ -23,7 +23,7 @@ void tokenhtml::contenido(stack<string> t,list<string> *l, string tag) {
                 string top = t.top();
                 if(top!="</"+tag+">"||top!="<"+tag+">"){
                     l->push_front(top); //ordena la lista de atras para adelante(desp podemos recorrerla de adelante
-                    cout<<"tag final: "<<top<<endl;                      // para atras) agreaga solo el contenido, los tags q lo contienen no van.
+                    cout<<"tag agregado: "<<top<<endl;   // para atras) agreaga solo el contenido, los tags q lo contienen no van.
                 }
                 t.pop();
             } while (t.top()!=("<"+tag+">"));
@@ -48,7 +48,7 @@ html::html(stack<string> t){
 }
 
 void html::show() {
-    cout<<"pesao"<<endl;
+
 }
 
 class body: protected tokenhtml{
@@ -110,7 +110,7 @@ public:
 };
 
 table::table(stack<string>t) {
-    this->name="h1";
+    this->name="table";
     this->contenido(t,lista,name);
 }
 
@@ -182,9 +182,9 @@ int main() {
     stack<string> *tokens=new stack<string>;
     string myText, str_auxiliar = " ", str_auxiliar2 = " ";
     stack<char> *pila = new stack<char>;
-    string apilando = " ";
+    string tope = " ";
     int p = 0, f = 0;
-    string str=" ";
+    string token=" ";
 
     bool error = true;
 // Read from the text file
@@ -197,34 +197,39 @@ int main() {
             if (myText.at(0) == ' ') {
                 trim(myText);
             }
-//            cout<<myText<<endl;
-            for(int i = 0; i<myText.length(); i++) {
-                if (myText.at(i) == '<') {
-                    p = i;
-                }
-                if (myText.at(i) == '>') {
-                    f = i + 1;
-                    str = myText.substr(p, f);
-                    tokens->push(str);
-//                    cout <<"agregado a la pila: "<<str << endl;
-                    for (int i=f; i<myText.length(); i++) {
-                        string subs=" ";
-                        if (myText.at(i) == '<') {
-                            subs = myText.substr(f, i - f);
-//                            cout <<"Intermedio agregado a la pila:"<<subs << endl;
-                            if (subs != " ") {
-                                tokens->push(subs);
-                            }
-                        }
-                    }
-                }
+            int size = myText.length();
 
+            for (int i = size - 1; i >= 0; i--) {
+                pila->push(myText.at(i));
+            }
 
+            while (!pila->empty()) {//repite esto hasta que se vacia la pila
+                tope = pila->top();
+                if (tope == "<") {//entra si encuentra un < al principio
+                    do {
+                        tope = pila->top();
+                        pila->pop();
+                        token += tope;
+                    } while (tope != ">");//guarda en un string lo que esta dentro de los brakets incluyendolos (tags)
+                    tokens->push(token);
+//                    cout << token << endl;
+                    token = "";//pone en null al string para que no se concatene todo el string, solo lo que necesitamos
+                }
+                if (!pila->empty()) {//entra aca si no es vacia la pila y si no hay un < al principio
+                    do {
+                        tope = pila->top();
+                        pila->pop();
+                        token += tope;
+                    } while (pila->top() != '<');//guarda el texto que se encuantra entre tags
+                    tokens->push(token);
+//                    cout << token << endl;
+                    token = "";//pone en null al string para que no se concatene todo el string, solo lo que necesitamos
+                }
             }
         }
     }
     MyReadFile.close();
-    tr test(*tokens);
+    table test(*tokens);
 
 //    cout<<endl<<"PILA: \n"<<endl;
 //    int sizefinal=tokens->size();
