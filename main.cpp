@@ -16,14 +16,19 @@ public:
 
 void tokenhtml::contenido(stack<string> t,list<string> *l, string tag) {
     int aux=t.size();
-    for(int i=0;i<aux;i++){
+    while(!t.empty()){
         if(t.top()==("</"+tag+">")) {
+            t.pop();
             do {
                 string top = t.top();
-                if(top!="</"+tag+">"||top!="<"+tag+">")l->push_front(top); //ordena la lista de atras para adelante(desp podemos recorrerla de adelante
-                cout << "tag final: " << top << endl;                      // para atras) agreaga solo el contenido, los tags q lo contienen no van.
+                if(top!="</"+tag+">"||top!="<"+tag+">"){
+                    l->push_front(top); //ordena la lista de atras para adelante(desp podemos recorrerla de adelante
+                    cout<<"tag final: "<<top<<endl;                      // para atras) agreaga solo el contenido, los tags q lo contienen no van.
+                }
                 t.pop();
-            } while (t.top() != ("<"+tag+">"));
+            } while (t.top()!=("<"+tag+">"));
+        } else{
+            t.pop();
         }
     }
 
@@ -43,7 +48,7 @@ html::html(stack<string> t){
 }
 
 void html::show() {
-
+    cout<<"pesao"<<endl;
 }
 
 class body: protected tokenhtml{
@@ -60,6 +65,7 @@ body::body(stack<string>t) {
 }
 
 void body::show() {
+    cout<<"pesao"<<endl;
 }
 
 class h1: protected tokenhtml{
@@ -163,6 +169,12 @@ void td::show() {
 
 }
 
+class listaTokens{
+public:
+    listaTokens() {};
+
+};
+
 void trim(string &str);
 
 int main() {
@@ -212,14 +224,15 @@ int main() {
         }
     }
     MyReadFile.close();
+    tr test(*tokens);
 
-    cout<<endl<<"PILA: \n"<<endl;
-    int sizefinal=tokens->size();
-    for(int i=0; i<sizefinal; i++){
-       cout<<tokens->top()<<endl;
-        tokens->pop();
-    }
-    cout<<"doneeeee"<<endl;
+//    cout<<endl<<"PILA: \n"<<endl;
+//    int sizefinal=tokens->size();
+//    for(int i=0; i<sizefinal; i++){
+//       cout<<tokens->top()<<endl;
+//        tokens->pop();
+//    }
+//    cout<<"doneeeee"<<endl;
 }
 
 void trim(string &str) {
