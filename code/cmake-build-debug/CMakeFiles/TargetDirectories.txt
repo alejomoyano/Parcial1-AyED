@@ -1,3 +1,0 @@
-/home/candela/Desktop/ALGORITMOS/GITHUB/Parcial1-AyED/code/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/candela/Desktop/ALGORITMOS/GITHUB/Parcial1-AyED/code/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/candela/Desktop/ALGORITMOS/GITHUB/Parcial1-AyED/code/cmake-build-debug/CMakeFiles/code.dir

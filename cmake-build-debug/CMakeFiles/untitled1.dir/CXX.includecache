@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/candela/CLionProjects/untitled1/main.cpp
+iostream
+-
+sstream
+-
+fstream
+-
+string
+-
+stack
+-
+list
+-
+
