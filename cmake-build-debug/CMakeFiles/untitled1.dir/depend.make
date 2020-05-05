@@ -3,5 +3,3 @@
 
 CMakeFiles/untitled1.dir/main.cpp.o: ../main.cpp
 
-CMakeFiles/untitled1.dir/tokenhtml.cpp.o: ../tokenhtml.cpp
-

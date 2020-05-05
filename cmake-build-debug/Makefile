@@ -48,10 +48,10 @@ RM = /home/candela/Downloads/CLion-2020.1.1/clion-2020.1.1/bin/cmake/linux/bin/c
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/candela/CLionProjects/untitled1
+CMAKE_SOURCE_DIR = /home/candela/Desktop/ALGORITMOS/GITHUB/Parcial1-AyED
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/candela/CLionProjects/untitled1/cmake-build-debug
+CMAKE_BINARY_DIR = /home/candela/Desktop/ALGORITMOS/GITHUB/Parcial1-AyED/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/candela/CLionProjects/untitled1/cmake-build-debug/CMakeFiles /home/candela/CLionProjects/untitled1/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/candela/Desktop/ALGORITMOS/GITHUB/Parcial1-AyED/cmake-build-debug/CMakeFiles /home/candela/Desktop/ALGORITMOS/GITHUB/Parcial1-AyED/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/candela/CLionProjects/untitled1/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/candela/Desktop/ALGORITMOS/GITHUB/Parcial1-AyED/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -150,33 +150,6 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-tokenhtml.o: tokenhtml.cpp.o
-
-.PHONY : tokenhtml.o
-
-# target to build an object file
-tokenhtml.cpp.o:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/tokenhtml.cpp.o
-.PHONY : tokenhtml.cpp.o
-
-tokenhtml.i: tokenhtml.cpp.i
-
-.PHONY : tokenhtml.i
-
-# target to preprocess a source file
-tokenhtml.cpp.i:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/tokenhtml.cpp.i
-.PHONY : tokenhtml.cpp.i
-
-tokenhtml.s: tokenhtml.cpp.s
-
-.PHONY : tokenhtml.s
-
-# target to generate assembly for a file
-tokenhtml.cpp.s:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/tokenhtml.cpp.s
-.PHONY : tokenhtml.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -189,9 +162,6 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... tokenhtml.o"
-	@echo "... tokenhtml.i"
-	@echo "... tokenhtml.s"
 .PHONY : help
 
 
