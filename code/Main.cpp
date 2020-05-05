@@ -243,61 +243,56 @@ bool pilavacia(){return this->esvacia();};
 
 int main() {
 
-
-    string myText, str_auxiliar = " ", str_auxiliar2 = " ";
+    string myText;
     Pila<char> *pila = new Pila<char>;
     Pila<string> *tokens = new Pila<string>;
-    string apilando = " ";
+    string tope = "", token = "";
 
-    bool error = true;
-// Read from the text file
-    ifstream MyReadFile("File.html");
+    ifstream MyReadFile("File.html");//lee un archivo con ese nombre
+    while (getline(MyReadFile, myText)) { //lee linea por linea el archivo
 
-// Use a while loop together with the getline() function to read the file line by line
-    while (getline(MyReadFile, myText)) {
-        int p = 0, f = 0;
-
-
-        if (myText != "") {
+        if (!myText.empty()) {
             if (myText.at(0) == ' ') {
                 trim(myText);
             }
-//        cout<<myText<<endl;
-            const int size = myText.length();
+        }
+        int size = myText.length();
 
-            // Output the text from the file
-            for (int i = 0; i < size; i++) {
-                if (myText.at(i) == '<') {
-                    p = i;
-                }
-                if (myText.at(i) == '>') {
-                    f = i + 1;
-                    string str = myText.substr(p, f);
-                    cout << str << endl;
-                    string inicio = intermedio(myText, f, size);
-                }
+        for (int i = size-1; i >= 0; i--) {
+            pila->apilar(myText.at(i));
+        }
+
+        while (!pila->pilavacia()) {
+            tope = pila->tope();
+            if (tope == "<") {
+                do {
+                    tope = pila->tope();
+                    pila->desapilar();
+                    token += tope;
+                } while (tope != ">");
+                tokens->apilar(token);
+                cout << token << endl;
+                token = "";
+            }
+            if (!pila->pilavacia()) {
+                do {
+                    tope = pila->tope();
+                    pila->desapilar();
+                    token += tope;
+                } while (pila->tope() != '<');
+                tokens->apilar(token);
+                cout << token << endl;
+                token = "";
             }
         }
     }
-        MyReadFile.close();
-    }
+    MyReadFile.close();
+}
 
 
-    string intermedio(string cadena, int p, int size) {
-        for (int i = p; i < size; i++) {
-            if (cadena.at(i) == '<') {
-                string subs = cadena.substr(p, i - p);
-                cout << subs << endl;
-                if (subs != " ") {
-                    return subs;
-                }
-            }
-        }
-    }
 
     void trim(string &str) {
     bool end=true;
-
             int i = 0,n=0;
             while (end) {
                 if (str.at(i) == ' ') {
@@ -308,22 +303,4 @@ int main() {
                 }
             }
             str.erase(0, n + 1);
-
     }
-
-//        char to_char[size];
-//        strcpy(to_char,myText.c_str());
-//        for (int i = 0; i < size; i++) {
-//            pila->apilar(myText.at(i));
-//        }
-//
-//        while (error){
-//            apilando=pila->tope();
-//            pila->desapilar();
-//            if(apilando==">"){
-//                apilando=">";
-//
-//            }
-//
-//            error=false;
-//        }
