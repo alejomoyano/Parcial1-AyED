@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/candela/Desktop/ALGORITMOS/GITHUB/Parcial1-AyED/main.cpp" "/home/candela/Desktop/ALGORITMOS/GITHUB/Parcial1-AyED/cmake-build-debug/CMakeFiles/untitled1.dir/main.cpp.o"
+  "/home/candela/Desktop/TP1 ALGORITMOS/Parcial1-AyED/main.cpp" "/home/candela/Desktop/TP1 ALGORITMOS/Parcial1-AyED/cmake-build-debug/CMakeFiles/untitled1.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

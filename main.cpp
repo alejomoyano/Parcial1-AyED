@@ -8,58 +8,60 @@
 using namespace std;
 
 class tokenhtml{
-
+    list<tokenhtml*> *tokenlist=new list<tokenhtml*>;
 public:
+    list<string> lista;
     virtual void show()=0;
-    void contenido(stack<string> t, list<string> *l, string tag);
+    void contenido(list<string> t, list<string> *l, string tag);
+    list<string> getContenido() {return lista;}
+    list<tokenhtml*> getTokenList() {return *tokenlist;}
 };
 
-void tokenhtml::contenido(stack<string> t,list<string> *l, string tag) {
-    int aux=t.size();
+void tokenhtml::contenido(list<string> t,list<string> *l, string tag) {
+    cout<<"Ejecutando metodo 'contenido' del objeto "<<tag<<endl;
     while(!t.empty()){
-        if(t.top()==("</"+tag+">")) {
-            t.pop();
-            do {
-                string top = t.top();
+        if(t.front()==("<"+tag+">")) {
+            t.pop_front();
+            while (t.front()!=("</"+tag+">")){
+                string top = t.front();
                 if(top!="</"+tag+">"||top!="<"+tag+">"){
-                    l->push_front(top); //ordena la lista de atras para adelante(desp podemos recorrerla de adelante
-                    cout<<"tag agregado: "<<top<<endl;   // para atras) agreaga solo el contenido, los tags q lo contienen no van.
+                    l->push_back(top); //ordena la lista de atras para adelante(desp podemos recorrerla de adelante
+                    cout<<"tag agregado: "<<top<<endl;
                 }
-                t.pop();
-            } while (t.top()!=("<"+tag+">"));
+                t.pop_front();
+            }
         } else{
-            t.pop();
+            t.pop_front();
         }
     }
-
 }
-
-class html: protected tokenhtml{
+//---------------------------------------------------------------------------------------------------------------------
+class html: public tokenhtml{
     string name; //nombre del tag
-    list<string> *lista=new list<string>; //guarda el contenido del tag
+    list<string> *lista=new list<string>; //guarda el contenido del tag, en strings
 public:
-    html(stack<string> t);
+    html(list<string> t);
     void show();
 };
 
-html::html(stack<string> t){
-    this->name="html";
+html::html(list<string> t) {
+    this->name = "html";
     this->contenido(t, lista, name);
 }
 
 void html::show() {
 
 }
-
-class body: protected tokenhtml{
+//---------------------------------------------------------------------------------------------------------------------
+class body: public tokenhtml{
     string name;
     list<string> *lista=new list<string>;
 public:
-    body(stack<string> t);
+    body(list<string> t);
     void show();
 };
 
-body::body(stack<string>t) {
+body::body(list<string>t) {
     this->name="body";
     this->contenido(t,lista,name);
 }
@@ -67,32 +69,33 @@ body::body(stack<string>t) {
 void body::show() {
     cout<<"pesao"<<endl;
 }
-
-class h1: protected tokenhtml{
+//---------------------------------------------------------------------------------------------------------------------
+class h1: public tokenhtml{
     string name;
     list<string> *lista=new list<string>;
 public:
-    h1(stack<string> t);
+    h1(list<string> t);
     void show();
 };
 
-h1::h1(stack<string>t) {
+h1::h1(list<string>t) {
     this->name="h1";
     this->contenido(t,lista,name);
 }
+
 void h1::show() {
 
 }
-
-class p: protected tokenhtml{
+//---------------------------------------------------------------------------------------------------------------------
+class p: public tokenhtml{
     string name;
     list<string> *lista=new list<string>;
 public:
-    p(stack<string> t);
+    p(list<string> t);
     void show();
 };
 
-p::p(stack<string>t) {
+p::p(list<string>t) {
     this->name="p";
     this->contenido(t,lista,name);
 }
@@ -100,16 +103,17 @@ p::p(stack<string>t) {
 void p::show() {
 
 }
-
-class table: protected tokenhtml{
+//---------------------------------------------------------------------------------------------------------------------
+class table: public tokenhtml{
     string name;
     list<string> *lista=new list<string>;
 public:
-    table(stack<string> t);
+    list<tokenhtml*> *tokenlist=new list<tokenhtml*>;
+    table(list<string> t);
     void show();
 };
 
-table::table(stack<string>t) {
+table::table(list<string>t) {
     this->name="table";
     this->contenido(t,lista,name);
 }
@@ -117,16 +121,17 @@ table::table(stack<string>t) {
 void table::show() {
 
 }
-
-class tr: protected tokenhtml{
+//---------------------------------------------------------------------------------------------------------------------
+class tr: public tokenhtml{
     string name;
     list<string> *lista=new list<string>;
 public:
-    tr(stack<string> t);
+    list<tokenhtml*> *tokenlist=new list<tokenhtml*>;
+    tr(list<string> t);
     void show();
 };
 
-tr::tr(stack<string>t) {
+tr::tr(list<string>t) {
     this->name="tr";
     this->contenido(t,lista,name);
 }
@@ -134,16 +139,16 @@ tr::tr(stack<string>t) {
 void tr::show() {
 
 }
-
-class th: protected tokenhtml{
+//---------------------------------------------------------------------------------------------------------------------
+class th: public tokenhtml{
     string name;
     list<string> *lista=new list<string>;
 public:
-    th(stack<string> t);
+    th(list<string> t);
     void show();
 };
 
-th::th(stack<string>t) {
+th::th(list<string>t) {
     this->name="th";
     this->contenido(t,lista,name);
 }
@@ -151,16 +156,16 @@ th::th(stack<string>t) {
 void th::show() {
 
 }
-
-class td: protected tokenhtml{
+//---------------------------------------------------------------------------------------------------------------------
+class td: public tokenhtml{
     string name;
     list<string> *lista=new list<string>;
 public:
-    td(stack<string> t);
+    td(list<string> t);
     void show();
 };
 
-td::td(stack<string>t) {
+td::td(list<string>t) {
     this->name="td";
     this->contenido(t,lista,name);
 }
@@ -168,22 +173,16 @@ td::td(stack<string>t) {
 void td::show() {
 
 }
-
-class listaTokens{
-public:
-    listaTokens() {};
-
-};
+//---------------------------------------------------------------------------------------------------------------------
 
 void trim(string &str);
 
 int main() {
 
-    stack<string> *tokens=new stack<string>;
+    list<string> *tokens=new list<string>;
     string myText, str_auxiliar = " ", str_auxiliar2 = " ";
     stack<char> *pila = new stack<char>;
     string tope = " ";
-    int p = 0, f = 0;
     string token=" ";
 
     bool error = true;
@@ -211,7 +210,8 @@ int main() {
                         pila->pop();
                         token += tope;
                     } while (tope != ">");//guarda en un string lo que esta dentro de los brakets incluyendolos (tags)
-                    tokens->push(token);
+                    if(token.at(0)==' ')token.erase(0,1);
+                    tokens->push_back(token);
 //                    cout << token << endl;
                     token = "";//pone en null al string para que no se concatene todo el string, solo lo que necesitamos
                 }
@@ -221,7 +221,8 @@ int main() {
                         pila->pop();
                         token += tope;
                     } while (pila->top() != '<');//guarda el texto que se encuantra entre tags
-                    tokens->push(token);
+                    if(token.at(0)==' ')token.erase(0,1);
+                    tokens->push_back(token);
 //                    cout << token << endl;
                     token = "";//pone en null al string para que no se concatene todo el string, solo lo que necesitamos
                 }
@@ -229,16 +230,36 @@ int main() {
         }
     }
     MyReadFile.close();
-    table test(*tokens);
+    if(tokens->front()=="<html>") {
+        tokenhtml *html1=new html(*tokens);
+        if (html1->getContenido().front() == "<body>") {
+            tokenhtml *b=new body(html1->getContenido());
+            html1->getTokenList().push_back(b);
+            for (string s:b->getContenido()) {
+                if (s == "<h1>") {
+                    tokenhtml *h11=new h1(b->getContenido());
+                    b->getTokenList().push_back(h11);
+                }
+                if (s == "<p>") {
+                    tokenhtml *p1=new p(b->getContenido());
+                    b->getTokenList().push_back(p1);
+                }
+                if (s == "<table>") {
+                    tokenhtml *table1=new table(b->getContenido());
+                    for (string s:table1->getContenido()) {
+                        if (s == "<tr>") {
+                            tr tr(table1->getContenido());
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-//    cout<<endl<<"PILA: \n"<<endl;
-//    int sizefinal=tokens->size();
-//    for(int i=0; i<sizefinal; i++){
-//       cout<<tokens->top()<<endl;
-//        tokens->pop();
-//    }
-//    cout<<"doneeeee"<<endl;
+
+
 }
+
 
 void trim(string &str) {
     bool end=true;
