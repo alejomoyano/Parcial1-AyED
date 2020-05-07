@@ -17,20 +17,20 @@ public:
 };
 
 void tokenhtml::contenido(list<string> t,list<string> *l, string tag) {
-    cout<<"Ejecutando metodo 'contenido' del objeto "<<tag<<endl;
+//    cout<<"Ejecutando metodo 'contenido' del objeto "<<tag<<endl;
     while(!t.empty()){
-        if(t.front()==("<"+tag+">")) {
+        if(t.front()==("<"+tag+">")) {//busca el tag que corresponda al parametro ingresado
             t.pop_front();
             while (t.front()!=("</"+tag+">")){
                 string top = t.front();
                 if(top!="</"+tag+">"||top!="<"+tag+">"){
-                    l->push_back(top); //ordena la lista de atras para adelante(desp podemos recorrerla de adelante
-                    cout<<"tag agregado: "<<top<<endl;
+                    l->push_back(top); //ordena la lista de atras para adelante
+//                    cout<<"tag agregado: "<<top<<endl;
                 }
-                t.pop_front();
+                t.pop_front();//lo saca luego de guardarlo en la lista
             }
         } else{
-            t.pop_front();
+            t.pop_front();//si no encuentra el tag, saca la cabeza y vuelve a verificar
         }
     }
 }
@@ -130,26 +130,7 @@ table::table(list<string>t) {
 void table::show() {
     cout << "\t" << "\t" << name << endl;
 }
-//---------------------------------------------------------------------------------------------------------------------
-class tr: public tokenhtml{
-    string name;
-    list<string> *lista=new list<string>;
-public:
-    list<tokenhtml*> *tokenlist=new list<tokenhtml*>;
-    tr(list<string> t);
-    void show();
-    string getName(){return name;}
-    list<string> getContenido() {return *lista;}
-};
 
-tr::tr(list<string>t) {
-    this->name="tr";
-    this->contenido(t,lista,name);
-}
-
-void tr::show() {
-    cout << "\t" << "\t" << "\t" << name << endl;
-}
 //---------------------------------------------------------------------------------------------------------------------
 class th: public tokenhtml{
     string name;
@@ -167,7 +148,10 @@ th::th(list<string>t) {
 }
 
 void th::show() {
-    cout << "\t" << "\t" << "\t" << "\t" << name << " " << getContenido().front() << endl;
+    while(!lista->empty()){
+        cout<<"\t"<<"\t"<<"\t"<<"\t"<<" "<<name<<" "<<lista->front()<<endl;
+        lista->pop_front();
+    }
 }
 //---------------------------------------------------------------------------------------------------------------------
 class td: public tokenhtml{
@@ -186,49 +170,73 @@ td::td(list<string>t) {
 }
 
 void td::show() {
-    cout << "\t" << "\t" << "\t" << "\t" << name << " " << getContenido().front() << endl;
+
+    while(!lista->empty()){
+        cout<<"\t"<<"\t"<<"\t"<<"\t"<<" "<<name<<" "<<lista->front()<<endl;
+        lista->pop_front();
+    }
+}
+//---------------------------------------------------------------------------------------------------------------------
+class tr: public tokenhtml{
+    string name;
+    list<string> *lista=new list<string>;
+public:
+    list<tokenhtml*> *tokenlist=new list<tokenhtml*>;
+    tr(list<string> t);
+    void show();
+    string getName(){return name;}
+    list<string> getContenido() {return *lista;}
+};
+
+tr::tr(list<string>t) {
+    this->name="tr";
+    this->contenido(t,lista,name);
+}
+
+void tr::show() {
+
+        cout<<"\t"<<"\t"<<"\t"<<name<<endl;
+
 }
 //---------------------------------------------------------------------------------------------------------------------
 
 void trim(string &str);
 
 int main() {
-
+//------TOKENIZE-------
     list<string> *tokens = new list<string>;
-    string myText, str_auxiliar = " ", str_auxiliar2 = " ";
+    string myText;
     stack<char> *pila = new stack<char>;
     string tope = " ";
     string token=" ";
 
-    bool error = true;
-// Read from the text file
-    ifstream MyReadFile("File.html");
+    ifstream MyReadFile("File.html");//busca el archivo
 
-// Use a while loop together with the getline() function to read the file line by line
-    while (getline(MyReadFile, myText)) {
+    while (getline(MyReadFile, myText)) {//guarda cada linea del .html en el string myText
 
-        if (myText != "") {
-            if (myText.at(0) == ' ') {
+        if (myText != "") {//si no us un string vacio
+            if (myText.at(0) == ' ') {//si hay un espacio al inicio del string, hace trim
                 trim(myText);
             }
+        }
             int size = myText.length();
 
-            for (int i = size - 1; i >= 0; i--) {
+            for (int i = size - 1; i >= 0; i--) {//guarda los caracteres en una pila
                 pila->push(myText.at(i));
             }
 
             while (!pila->empty()) {//repite esto hasta que se vacia la pila
                 tope = pila->top();
-                if (tope == "<") {//entra si encuentra un < al principio
+                if (tope == "<") {
                     do {
                         tope = pila->top();
                         pila->pop();
-                        token += tope;
+                        token += tope;//concatena los caracteres
                     } while (tope != ">");//guarda en un string lo que esta dentro de los brakets incluyendolos (tags)
-                    if(token.at(0)==' ')token.erase(0,1);
+                    if(token.at(0)==' ')token.erase(0,1);//nos aseguramos de que notengan un espacio al inicio
                     tokens->push_back(token);
 //                    cout << token << endl;
-                    token = "";//pone en null al string para que no se concatene todo el string, solo lo que necesitamos
+                    token = "";//pone en null al string para que no se concatenen los tokens
                 }
                 if (!pila->empty()) {//entra aca si no es vacia la pila y si no hay un < al principio
                     do {
@@ -236,121 +244,146 @@ int main() {
                         pila->pop();
                         token += tope;
                     } while (pila->top() != '<');//guarda el texto que se encuantra entre tags
-                    if(token.at(0)==' ')token.erase(0,1);
+                    if(token.at(0)==' ')token.erase(0,1);//nos aseguramos de que notengan un espacio al inicio
                     tokens->push_back(token);
 //                    cout << token << endl;
-                    token = "";//pone en null al string para que no se concatene todo el string, solo lo que necesitamos
+                    token = "";//pone en null al string para que no se concatene los tokens
                 }
             }
         }
-    }
-    MyReadFile.close();
 
+    MyReadFile.close();//cierra el archivo
+
+    //------PRINT------
+        html b(*tokens);
+        b.show();
+        body b1(*tokens);
+        b1.show();
+        h1 h(*tokens);
+        h.show();
+        p p1(*tokens);
+        p1.show();
+        table t(*tokens);
+        t.show();
+        tr ter(*tokens);
+        ter.show();
+        th tah(*tokens);
+        tah.show();
+        td ted(*tokens);
+        ted.show();
+    }
+//    list<string> l = b.getContenido();
+
+
+//    while (!l.empty()) {  //muestra cada token almacenado en la pila
+//        cout<<l.front()<<endl;
+//        l.pop_front();
+//    }
 
     // ------ PARSING --------
 
-    list<string> auxList, auxList2;
+//    list<string> auxList, auxList2;
+//
+//    if(tokens->front()=="<html>") {
+//        tokens->pop_front();
+//        tokens->pop_back();
+//        tokenhtml *html1=new html(*tokens);
+//        if (tokens->front() == "<body>") {
+//            tokens->pop_front();
+//            tokens->pop_back();
+//            tokenhtml *b = new body(*tokens);
+//            html1->getTokenList().push_back(b);
+//            for (string s:b->getContenido()) {
+//                if (s == "<h1>") {
+//                    tokens->pop_front();
+//
+//                    auxList.push_back((string) tokens->front());
+//                    tokenhtml *h11=new h1(auxList);
+//                    tokens->pop_front();
+//
+//                    //h11->setContent();
+//                    auxList.pop_back();
+//                    b->getTokenList().push_back(h11);
+//                    tokens->pop_front();
+//                }
+//                if (s == "<p>") {
+//                    tokens->pop_front();
+//
+//                    auxList.push_back((string) tokens->front());
+//                    tokenhtml *p1=new p(auxList);
+//                    tokens->pop_front();
+//
+//                    //h11->setContent();
+//                    auxList.pop_back();
+//
+//                    b->getTokenList().push_back(p1);
+//                    tokens->pop_front();
+//
+//                }
+//                if (s == "<table>") {
+//                    tokens->pop_front();
+//                    tokens->pop_back();
+//                    tokenhtml *table1 = new table(*tokens);
+//                    for (string s:table1->getContenido()) {
+//                        if (s == "<tr>") {
+//                            tokens->pop_front();
+//                            while(tokens->front() != "</tr>"){
+//                                auxList.push_back((string) tokens->front());
+//                                tokens->pop_front();
+//                            }
+//                            tokens->pop_front();
+//                            tokenhtml *tr1 = new tr(auxList);
+//                            for (string s:auxList){
+//                                if (s == "<th>") {
+//                                    auxList.pop_front();
+//                                    auxList2.push_back((string )auxList.front());
+//                                    tokenhtml *th1=new th(auxList2);
+//                                    auxList.pop_front();
+//
+//                                    //h11->setContent();
+//                                    auxList2.pop_back();
+//
+//                                    tr1->getTokenList().push_back(th1);
+//                                    auxList.pop_front();
+//                                }
+//                                if (s == "<td>") {
+//                                    auxList.pop_front();
+//                                    auxList2.push_back((string )auxList.front());
+//                                    tokenhtml *td1=new td(auxList2);
+//                                    auxList.pop_front();
+//
+//                                    //h11->setContent();
+//                                    auxList2.pop_back();
+//
+//                                    tr1->getTokenList().push_back(td1);
+//                                    auxList.pop_front();
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        while(!html1->getTokenList().empty()) {
+//            html1->getTokenList().front()->show();
+//            html1->getTokenList().pop_front();
+//        }
+//    }
 
-    if(tokens->front()=="<html>") {
-        tokens->pop_front();
-        tokens->pop_back();
-        tokenhtml *html1=new html(*tokens);
-        if (tokens->front() == "<body>") {
-            tokens->pop_front();
-            tokens->pop_back();
-            tokenhtml *b = new body(*tokens);
-            html1->getTokenList().push_back(b);
-            for (string s:b->getContenido()) {
-                if (s == "<h1>") {
-                    tokens->pop_front();
-
-                    auxList.push_back((string) tokens->front());
-                    tokenhtml *h11=new h1(auxList);
-                    tokens->pop_front();
-
-                    //h11->setContent();
-                    auxList.pop_back();
-                    b->getTokenList().push_back(h11);
-                    tokens->pop_front();
-                }
-                if (s == "<p>") {
-                    tokens->pop_front();
-
-                    auxList.push_back((string) tokens->front());
-                    tokenhtml *p1=new p(auxList);
-                    tokens->pop_front();
-
-                    //h11->setContent();
-                    auxList.pop_back();
-
-                    b->getTokenList().push_back(p1);
-                    tokens->pop_front();
-
-                }
-                if (s == "<table>") {
-                    tokens->pop_front();
-                    tokens->pop_back();
-                    tokenhtml *table1 = new table(*tokens);
-                    for (string s:table1->getContenido()) {
-                        if (s == "<tr>") {
-                            tokens->pop_front();
-                            while(tokens->front() != "</tr>"){
-                                auxList.push_back((string) tokens->front());
-                                tokens->pop_front();
-                            }
-                            tokens->pop_front();
-                            tokenhtml *tr1 = new tr(auxList);
-                            for (string s:auxList){
-                                if (s == "<th>") {
-                                    auxList.pop_front();
-                                    auxList2.push_back((string )auxList.front());
-                                    tokenhtml *th1=new th(auxList2);
-                                    auxList.pop_front();
-
-                                    //h11->setContent();
-                                    auxList2.pop_back();
-
-                                    tr1->getTokenList().push_back(th1);
-                                    auxList.pop_front();
-                                }
-                                if (s == "<td>") {
-                                    auxList.pop_front();
-                                    auxList2.push_back((string )auxList.front());
-                                    tokenhtml *td1=new td(auxList2);
-                                    auxList.pop_front();
-
-                                    //h11->setContent();
-                                    auxList2.pop_back();
-
-                                    tr1->getTokenList().push_back(td1);
-                                    auxList.pop_front();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        while(!html1->getTokenList().empty()) {
-            html1->getTokenList().front()->show();
-            html1->getTokenList().pop_front();
-        }
-    }
-}
 
 
-void trim(string &str) {
+void trim(string &str) {// hace trim de los espacios al inicio del string
     bool end=true;
 
     int i = 0,n=0;
     while (end) {
-        if (str.at(i) == ' ') {
+        if (str.at(i) == ' ') {//recorre caracter a caracter y si es un espacio guarda su posicion en el string
             n = i;
             i++;
-        } else {
-            end = false;
+        } else {//ejecuta el el se cuando ya no hay mas espacios en blanco
+            end = false;//break el while
         }
     }
-    str.erase(0, n + 1);
+    str.erase(0, n + 1);//borra desde la posicion 0 hasta n
 
 }

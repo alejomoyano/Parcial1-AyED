@@ -1,3 +1,3 @@
-/home/candela/Desktop/TP1 ALGORITMOS/Parcial1-AyED (copy)/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/candela/Desktop/TP1 ALGORITMOS/Parcial1-AyED (copy)/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/candela/Desktop/TP1 ALGORITMOS/Parcial1-AyED (copy)/cmake-build-debug/CMakeFiles/untitled1.dir
+C:/Users/alejo/Documents/Facultad/AyED/1erParcial/Parcial1-AyED/cmake-build-debug/CMakeFiles/untitled1.dir
+C:/Users/alejo/Documents/Facultad/AyED/1erParcial/Parcial1-AyED/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/alejo/Documents/Facultad/AyED/1erParcial/Parcial1-AyED/cmake-build-debug/CMakeFiles/rebuild_cache.dir
