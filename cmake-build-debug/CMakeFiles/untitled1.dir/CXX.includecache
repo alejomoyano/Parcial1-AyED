@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/candela/Desktop/TP1 ALGORITMOS/Parcial1-AyED/main.cpp
+iostream
+-
+sstream
+-
+fstream
+-
+string
+-
+stack
+-
+list
+-
+
