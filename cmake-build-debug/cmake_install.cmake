@@ -1,4 +1,4 @@
-# Install script for directory: /home/candela/Desktop/TP1 ALGORITMOS/Parcial1-AyED
+# Install script for directory: /home/candela/Desktop/TP1 ALGORITMOS/Parcial1-AyED (copy)
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/candela/Desktop/TP1 ALGORITMOS/Parcial1-AyED/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/candela/Desktop/TP1 ALGORITMOS/Parcial1-AyED (copy)/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

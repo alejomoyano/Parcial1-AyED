@@ -1,4 +1,4 @@
-/home/candela/Downloads/CLion-2020.1.1/clion-2020.1.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/home/candela/Desktop/TP1 ALGORITMOS/Parcial1-AyED"
+/home/candela/Downloads/CLion-2020.1.1/clion-2020.1.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/home/candela/Desktop/TP1 ALGORITMOS/Parcial1-AyED (copy)"
 -- The C compiler identification is GNU 7.5.0
 -- The CXX compiler identification is GNU 7.5.0
 -- Check for working C compiler: /usr/bin/cc
@@ -15,4 +15,4 @@
 -- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/candela/Desktop/TP1 ALGORITMOS/Parcial1-AyED/cmake-build-debug
+-- Build files have been written to: /home/candela/Desktop/TP1 ALGORITMOS/Parcial1-AyED (copy)/cmake-build-debug
