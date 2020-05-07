@@ -7,13 +7,14 @@
 
 using namespace std;
 
+//clase abstracta de tokenhtml, de la cual heredan las clases siguientes
 class tokenhtml{
-    list<tokenhtml*> *tokenlist=new list<tokenhtml*>;
+    list<tokenhtml*> *tokenlist=new list<tokenhtml*>;//guarda los objetos
 public:
-    virtual void show()=0;
     void contenido(list<string> t, list<string> *l, string tag);
     list<tokenhtml*> getTokenList() {return *tokenlist;}
     virtual list<string> getContenido()=0;
+    virtual void show()=0;
 };
 
 void tokenhtml::contenido(list<string> t,list<string> *l, string tag) {
@@ -272,13 +273,6 @@ int main() {
         td ted(*tokens);
         ted.show();
     }
-//    list<string> l = b.getContenido();
-
-
-//    while (!l.empty()) {  //muestra cada token almacenado en la pila
-//        cout<<l.front()<<endl;
-//        l.pop_front();
-//    }
 
     // ------ PARSING --------
 
